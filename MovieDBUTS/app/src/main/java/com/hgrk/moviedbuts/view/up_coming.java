@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,19 +17,20 @@ import android.widget.AbsListView;
 import android.widget.ProgressBar;
 
 import com.hgrk.moviedbuts.R;
-import com.hgrk.moviedbuts.adapter.NowPlayingAdapter;
-import com.hgrk.moviedbuts.model.NowPlaying;
+
+import com.hgrk.moviedbuts.adapter.UpComingAdapter;
+
+import com.hgrk.moviedbuts.model.Upcoming;
 import com.hgrk.moviedbuts.viewmodel.MovieViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link now_playing#newInstance} factory method to
+ * Use the {@link up_coming#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class now_playing extends Fragment {
+public class up_coming extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,10 +43,10 @@ public class now_playing extends Fragment {
     private LinearLayoutManager lm;
     boolean scroll = false;
     ProgressBar LoadingIcon;
-    NowPlayingAdapter adapter;
+    UpComingAdapter adapter;
     int page=1;
     int current_items, itemcount, scrolleditem,first_item;
-    public now_playing() {
+    public up_coming() {
         // Required empty public constructor
     }
 
@@ -56,19 +56,18 @@ public class now_playing extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment now_playing.
+     * @return A new instance of fragment up_coming.
      */
     // TODO: Rename and change types and number of parameters
-    public static now_playing newInstance(String param1, String param2) {
-        now_playing fragment = new now_playing();
+    public static up_coming newInstance(String param1, String param2) {
+        up_coming fragment = new up_coming();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
-    private RecyclerView rv_now_playing;
-    private MovieViewModel view_model;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,20 +76,21 @@ public class now_playing extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+    private RecyclerView rv_up_coming;
+    private MovieViewModel view_model;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       View view = inflater.inflate(R.layout.fragment_now_playing, container, false);
-        rv_now_playing=view.findViewById(R.id.rv_now_playing);
+        View view = inflater.inflate(R.layout.fragment_up_coming, container, false);
+        rv_up_coming=view.findViewById(R.id.rv_up_coming);
         view_model=new ViewModelProvider(getActivity()).get(MovieViewModel.class);
-        view_model.getNowPlaying(page);
+        view_model.getUpComing(page);
         lm = new LinearLayoutManager(getActivity());
-         adapter =new NowPlayingAdapter(getActivity());
         LoadingIcon = view.findViewById(R.id.loadingicon);
-        view_model.getResultNowPlaying().observe(getActivity(), showNowPlaying);
-        rv_now_playing.setLayoutManager(lm);
-        rv_now_playing.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        adapter =new UpComingAdapter(getActivity());
+        view_model.getResultUpComing().observe(getActivity(), showUpComing);
+        rv_up_coming.setLayoutManager(lm);
+        rv_up_coming.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -98,7 +98,6 @@ public class now_playing extends Fragment {
                     scroll = true;
                 }
             }
-
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 current_items = lm.getChildCount();
@@ -110,10 +109,10 @@ public class now_playing extends Fragment {
                     Log.v("", "Terakir");
                     page = page + 1;
                     LoadingIcon.setVisibility(View.VISIBLE);
-                    view_model.getNowPlaying(page);
-                    view_model.getResultNowPlaying().observe(getActivity(), new Observer<List<NowPlaying.Results>>() {
+                    view_model.getUpComing(page);
+                    view_model.getResultUpComing().observe(getActivity(), new Observer<List<Upcoming.Results>>() {
                         @Override
-                        public void onChanged(List<NowPlaying.Results> list) {
+                        public void onChanged(List<Upcoming.Results> list) {
                             LoadingIcon.setVisibility(View.INVISIBLE);
                             adapter.notifyDataSetChanged();
                         }
@@ -121,22 +120,20 @@ public class now_playing extends Fragment {
                     });
                 }
             }
-        });
 
-        view_model.getResultNowPlaying().observe(getActivity(), showNowPlaying);
+    });
 
-       return view;
+
+        return view;
     }
-    private Observer<List<NowPlaying.Results>> showNowPlaying=new Observer<List<NowPlaying.Results>>(){
+
+    private Observer<List<Upcoming.Results>> showUpComing=new Observer<List<Upcoming.Results>>(){
 
         @Override
-        public void onChanged(List<NowPlaying.Results> nowPlaying) {
+        public void onChanged(List<Upcoming.Results> upcoming) {
             LoadingIcon.setVisibility(View.INVISIBLE);
-
-
-
-            adapter.setListNowPlaying(nowPlaying);
-            rv_now_playing.setAdapter(adapter);
+            adapter.setListUpcoming(upcoming);
+            rv_up_coming.setAdapter(adapter);
         }
     };
 }

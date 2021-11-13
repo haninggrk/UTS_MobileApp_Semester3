@@ -11,7 +11,10 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.hgrk.moviedbuts.model.Movies;
 import com.hgrk.moviedbuts.model.NowPlaying;
+import com.hgrk.moviedbuts.model.Upcoming;
 import com.hgrk.moviedbuts.repositories.MovieRepository;
+
+import java.util.List;
 
 public class MovieViewModel extends AndroidViewModel {
 
@@ -38,13 +41,19 @@ public class MovieViewModel extends AndroidViewModel {
 
 
     //==begin of viewmodel get now playing
-    private MutableLiveData<NowPlaying> resultGetNowPlaying= new MutableLiveData<>();
-    public void getNowPlaying(){
-        resultGetNowPlaying = repository.getNowPlayingData();
+    private MutableLiveData<List<NowPlaying.Results>> resultGetNowPlaying= new MutableLiveData<>();
+    private MutableLiveData<List<Upcoming.Results>> resultGetUpComing= new MutableLiveData<>();
+    public void getNowPlaying(int page){
+        resultGetNowPlaying = repository.getNowPlayingData(page);
     }
-    public LiveData<NowPlaying> getResultNowPlaying(){
+    public void getUpComing(int page){
+        resultGetUpComing = repository.getUpComingData(page);
+    }
+    public LiveData<List<NowPlaying.Results>> getResultNowPlaying(){
         return  resultGetNowPlaying;
     }
-
+    public LiveData<List<Upcoming.Results>> getResultUpComing(){
+        return  resultGetUpComing;
+    }
 //==end of viewmodel get movie by id
 }

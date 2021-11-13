@@ -2,7 +2,7 @@ package com.hgrk.moviedbuts.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
+import com.hgrk.moviedbuts.model.Genre;
 import java.util.List;
 
 public class Movies implements Parcelable {
@@ -15,7 +15,7 @@ public class Movies implements Parcelable {
         private String backdrop_path;
         private Object belongs_to_collection;
         private int budget;
-        private List<Genre> genres;
+        private List<GenresDTO> genres;
         private String homepage;
         private int id;
         private String imdb_id;
@@ -106,11 +106,11 @@ public class Movies implements Parcelable {
             this.budget = budget;
         }
 
-        public List<Genre> getGenres() {
+        public List<GenresDTO> getGenres() {
             return genres;
         }
 
-        public void setGenres(List<Genre> genres) {
+        public void setGenres(List<GenresDTO> genres) {
             this.genres = genres;
         }
 

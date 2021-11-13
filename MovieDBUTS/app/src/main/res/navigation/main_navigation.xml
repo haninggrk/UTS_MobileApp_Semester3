@@ -3,20 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/splashscreen">
+    app:startDestination="@id/SplashScreen">
 
     <fragment
-        android:id="@+id/splashscreen"
+        android:id="@+id/SplashScreen"
         android:name="com.hgrk.moviedbuts.splashscreen"
         android:label="fragment_splashscreen"
         tools:layout="@layout/fragment_splashscreen" >
         <action
             android:id="@+id/action_splashscreen_to_now_playing"
-            app:destination="@id/now_playing" />
+            app:destination="@id/nowPlayingFragment" />
+        <action
+            android:id="@+id/action_SplashScreen_to_UpCoomingFragment"
+            app:destination="@id/upComingFragment" />
     </fragment>
     <fragment
-        android:id="@+id/now_playing"
+        android:id="@+id/nowPlayingFragment"
         android:name="com.hgrk.moviedbuts.view.now_playing"
         android:label="fragment_now_playing"
         tools:layout="@layout/fragment_now_playing" />
+    <fragment
+        android:id="@+id/upComingFragment"
+        android:name="com.hgrk.moviedbuts.view.up_coming"
+        android:label="up_coming" >
+        <action
+            android:id="@+id/action_UpCoomingFragment_to_nowPlayingFragment"
+            app:destination="@id/nowPlayingFragment" />
+    </fragment>
 </navigation>

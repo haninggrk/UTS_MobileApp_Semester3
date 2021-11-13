@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/menu_nowplaying"
+        android:id="@+id/nowPlayingFragment"
         android:icon="@drawable/ic_now_playing"
         android:title="@string/now_playing" />
     <item
-        android:id="@+id/menu_upcoming"
+        android:id="@+id/upComingFragment"
         android:icon="@drawable/ic_up_coming"
         android:title="@string/up_coming" />
 </menu>

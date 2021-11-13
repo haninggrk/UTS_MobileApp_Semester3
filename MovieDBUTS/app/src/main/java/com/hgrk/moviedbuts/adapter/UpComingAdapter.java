@@ -13,37 +13,41 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.hgrk.moviedbuts.view.MovieDetails;
 import com.hgrk.moviedbuts.R;
 import com.hgrk.moviedbuts.helper.Cons;
-import com.hgrk.moviedbuts.model.NowPlaying;
+
+import com.hgrk.moviedbuts.model.Upcoming;
+import com.hgrk.moviedbuts.view.MovieDetails;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.CardViewViewHolder>{
+public class UpComingAdapter extends RecyclerView.Adapter<UpComingAdapter.CardViewViewHolder> {
     private Context contex;
-    private List<NowPlaying.Results> ListNowPlaying;
-    private List<NowPlaying.Results> getListNowPlaying(){
-        return ListNowPlaying;
+    private List<Upcoming.Results> ListUpComing;
+    private List<Upcoming.Results> getListUpComing(){
+        return ListUpComing;
     }
-    public void setListNowPlaying(List<NowPlaying.Results>ListNowPlaying){
-        this.ListNowPlaying=ListNowPlaying;
+    public void setListUpcoming(List<Upcoming.Results> ListUpComing){
+        this.ListUpComing=ListUpComing;
     }
-    public NowPlayingAdapter(Context contex){
+    public void set(List<Upcoming.Results>ListUpComing){
+        this.ListUpComing=ListUpComing;
+    }
+    public UpComingAdapter(Context contex){
         this.contex=contex;
     }
 
     @NonNull
     @Override
-    public NowPlayingAdapter.CardViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public UpComingAdapter.CardViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_card,parent, false);
-        return new NowPlayingAdapter.CardViewViewHolder(view);
+        return new UpComingAdapter.CardViewViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NowPlayingAdapter.CardViewViewHolder holder, int position) {
-        final NowPlaying.Results results=getListNowPlaying().get(position);
+    public void onBindViewHolder(@NonNull UpComingAdapter.CardViewViewHolder holder, int position) {
+        final Upcoming.Results results=getListUpComing().get(position);
         holder.lbl_title.setText(results.getTitle());
 
 
@@ -69,7 +73,7 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.Ca
 
     @Override
     public int getItemCount() {
-        return getListNowPlaying().size();
+        return getListUpComing().size();
     }
 
     public class CardViewViewHolder extends RecyclerView.ViewHolder {
@@ -84,4 +88,3 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.Ca
         }
     }
 }
-

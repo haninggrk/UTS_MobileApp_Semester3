@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link splashscreen#newInstance} factory method to
@@ -58,15 +60,19 @@ public class splashscreen extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_splashscreen, container, false);
+        BottomNavigationView navBar = getActivity().findViewById(R.id.bottom_nav_view);
+        navBar.setVisibility(View.INVISIBLE);
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
+                navBar.setVisibility(View.VISIBLE);
                 Navigation.findNavController(view).navigate(R.id.action_splashscreen_to_now_playing);
             }
         }, 3000);
