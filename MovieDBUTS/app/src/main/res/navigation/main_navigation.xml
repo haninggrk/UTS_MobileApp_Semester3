@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/splashscreen">
+
+    <fragment
+        android:id="@+id/splashscreen"
+        android:name="com.hgrk.moviedbuts.splashscreen"
+        android:label="fragment_splashscreen"
+        tools:layout="@layout/fragment_splashscreen" >
+        <action
+            android:id="@+id/action_splashscreen_to_now_playing"
+            app:destination="@id/now_playing" />
+    </fragment>
+    <fragment
+        android:id="@+id/now_playing"
+        android:name="com.hgrk.moviedbuts.view.now_playing"
+        android:label="fragment_now_playing"
+        tools:layout="@layout/fragment_now_playing" />
+</navigation>

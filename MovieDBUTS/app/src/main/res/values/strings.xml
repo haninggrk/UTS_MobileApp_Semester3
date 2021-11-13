@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MovieDBUTS</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="up_coming">Upcoming</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="GALIHFLIX">GALIHFLIX</string>
+    <string name="Company" />
+    <string name="Producer">Company Producer</string>
+</resources>
